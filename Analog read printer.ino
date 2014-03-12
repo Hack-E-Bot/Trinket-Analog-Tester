@@ -11,13 +11,10 @@ For Trinket by Adafruit Industries
 void setup()
 {
   // button pins as inputs
-  analogReference(INTERNAL1V);
+  //analogReference(EXTERNAL);
   
   pinMode(PIN_BUTTON_CAPITAL_A, INPUT);
-  //pinMode(2, INPUT);
-  //pinMode(4, INPUT);
-  //digitalWrite(2, LOW);
-  //digitalWrite(4, LOW);
+
   // setting input pins to high means turning on internal pull-up resistors
   digitalWrite(PIN_BUTTON_CAPITAL_A, HIGH);
   // remember, the buttons are active-low, they read LOW when they are not pressed
@@ -30,7 +27,9 @@ void setup()
 void loop()
 {
   TrinketKeyboard.poll();
-  int photocellReading = analogRead(3);
+  int photocellR = analogRead(1);
+  int photocellL = analogRead(3);
+
 
   // the poll function must be called at least once every 10 ms
   // or cause a keystroke
@@ -40,7 +39,10 @@ void loop()
   if (digitalRead(PIN_BUTTON_CAPITAL_A) == LOW)
   {
     // type out a string using the Print class
-    TrinketKeyboard.print(" A=");
-    TrinketKeyboard.print(photocellReading);     // the raw analog reading
+    TrinketKeyboard.print(" A1=");
+    TrinketKeyboard.print(photocellR);     // the raw analog reading
+    TrinketKeyboard.print(" A3=");
+    TrinketKeyboard.print(photocellL);     // the raw analog reading
+    TrinketKeyboard.print(", ");
   }
 }
