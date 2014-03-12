@@ -11,23 +11,26 @@ For Trinket by Adafruit Industries
 void setup()
 {
   // button pins as inputs
+  analogReference(INTERNAL1V);
+  
   pinMode(PIN_BUTTON_CAPITAL_A, INPUT);
-  pinMode(PIN_BUTTON_STRING, INPUT);
-
+  //pinMode(2, INPUT);
+  //pinMode(4, INPUT);
+  //digitalWrite(2, LOW);
+  //digitalWrite(4, LOW);
   // setting input pins to high means turning on internal pull-up resistors
   digitalWrite(PIN_BUTTON_CAPITAL_A, HIGH);
-  digitalWrite(PIN_BUTTON_STRING, HIGH);
   // remember, the buttons are active-low, they read LOW when they are not pressed
 
   // start USB stuff
   TrinketKeyboard.begin();
+  
 }
 
 void loop()
 {
   TrinketKeyboard.poll();
-  int photocellReading2 = analogRead(3);
-  int photocellReading = analogRead(1);
+  int photocellReading = analogRead(3);
 
   // the poll function must be called at least once every 10 ms
   // or cause a keystroke
